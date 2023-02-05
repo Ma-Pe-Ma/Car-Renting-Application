@@ -116,27 +116,14 @@ namespace CarRenting.ViewModels
             // Check if a car is selected or not
             if (_selectedCar != null)
             {
-                if (!isValidUserCarInput())
+                if (!IsValidUserCarInput())
                 {
                     return;
                 }
 
-                //do not save car if new license plate number is the same as an other car's
-                foreach (Car car in dbContext.Cars)  
+                if (IsLicensePlateTaken())
                 {
-                    //skip to next item if the selected car is the same as the checked
-                    if (car.CarId == _selectedCar._car.CarId)
-                    {
-                        continue;
-                    }
-
-                    // if car exists with same license plate do not save the edited one
-                    if (car.LicensePlateNumber == _selectedCar._car.LicensePlateNumber)
-                    {
-                        string invalidLicensePlateNumber = "License plate already used.";
-                        SetMessage(invalidLicensePlateNumber);
-                        return;
-                    }
+                    return;
                 }
 
                 if (!dbContext.Cars.Contains(_selectedCar._car))
@@ -248,7 +235,7 @@ namespace CarRenting.ViewModels
             return null;
         }
 
-        public bool isValidUserCarInput()
+        public bool IsValidUserCarInput()
         {
             if (String.IsNullOrEmpty(_selectedCar._car.LicensePlateNumber))
             {
@@ -279,6 +266,30 @@ namespace CarRenting.ViewModels
             }
 
             return true;
+        }
+
+        bool IsLicensePlateTaken()
+        {
+            //do not save car if new license plate number is the same as an other car's
+            foreach (Car car in dbContext.Cars)
+            {
+                //skip to next item if the selected car is the same as the checked
+                if (car.CarId == _selectedCar._car.CarId)
+                {
+                    continue;
+                }
+
+                // if car exists with same license plate do not save the edited one
+                if (car.LicensePlateNumber == _selectedCar._car.LicensePlateNumber)
+                {
+                    //TODO: get value from resource file
+                    string invalidLicensePlateNumber = "License plate already used.";
+                    SetMessage(invalidLicensePlateNumber);
+                    return true;
+                }
+            }
+
+            return false;
         }
 
         DateTime lastTime = DateTime.Now;

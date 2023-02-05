@@ -130,12 +130,12 @@ namespace CarRenting.ViewModels
 
         private void SaveUpdate()
         {
-            if (!isValidUserRentingInput())
+            if (!IsValidUserRentingInput())
             {
                 return;
             }
 
-            if (overlapsWithOtherRenting())
+            if (OverlapsWithOtherRenting())
             {
                 return;
             }
@@ -273,7 +273,7 @@ namespace CarRenting.ViewModels
         #endregion
 
         #region Helper methods
-        public bool isValidUserRentingInput()
+        public bool IsValidUserRentingInput()
         {
             if (_selectedRenting == null)
             {
@@ -318,7 +318,7 @@ namespace CarRenting.ViewModels
             return true;
         }
 
-        bool overlapsWithOtherRenting()
+        bool OverlapsWithOtherRenting()
         {
             //TODO: load strings from resource file
             string overlappingDateTitle = "Overlapping dates";

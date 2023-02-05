@@ -23,14 +23,14 @@ namespace CarRentingTests
 
             carListViewModel.SelectedCar = new CarViewModel(car);
 
-            Assert.IsTrue(carListViewModel.isValidUserCarInput(), "Car input should be valid.");
+            Assert.IsTrue(carListViewModel.IsValidUserCarInput(), "Car input should be valid.");
             
             car.LicensePlateNumber = "";
-            Assert.IsFalse(carListViewModel.isValidUserCarInput(), "License plate number is invalid.");
+            Assert.IsFalse(carListViewModel.IsValidUserCarInput(), "License plate number should be invalid.");
 
             car.Year = 3000;
             car.LicensePlateNumber = "ABC-123";
-            Assert.IsFalse(carListViewModel.isValidUserCarInput(), "Year is not valid.");            
+            Assert.IsFalse(carListViewModel.IsValidUserCarInput(), "Year should be invalid.");            
         }
 
         [TestMethod]
@@ -51,14 +51,14 @@ namespace CarRentingTests
             RentingViewModel rentingViewModel = new RentingViewModel(renting);
 
             rentingListViewModel.SelectedRenting = rentingViewModel;
-            Assert.IsTrue(rentingListViewModel.isValidUserRentingInput(), "Renting should be valid.");
+            Assert.IsTrue(rentingListViewModel.IsValidUserRentingInput(), "Renting should be valid.");
 
             renting.EndTime = DateTime.Now.AddDays(-1).Date;
-            Assert.IsFalse(rentingListViewModel.isValidUserRentingInput(), "Date interval should be invalid.");
+            Assert.IsFalse(rentingListViewModel.IsValidUserRentingInput(), "Date interval should be invalid.");
 
             renting.EndTime = DateTime.Now.Date;
             renting.CustomerName = null;
-            Assert.IsFalse(rentingListViewModel.isValidUserRentingInput(), "Customer name should be null!");
+            Assert.IsFalse(rentingListViewModel.IsValidUserRentingInput(), "Customer name should be null!");
         }
     }
 }
