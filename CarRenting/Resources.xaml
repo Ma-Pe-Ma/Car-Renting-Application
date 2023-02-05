@@ -1,0 +1,14 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:crvm ="clr-namespace:CarRenting.ViewModels"
+                    xmlns:crvw ="clr-namespace:CarRenting.Views">
+
+    <DataTemplate DataType="{x:Type crvm:CarListViewModel}">
+        <crvw:CarListView/>
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type crvm:RentingListViewModel}">
+        <crvw:RentingListView/>
+    </DataTemplate>
+
+</ResourceDictionary>
